@@ -110,28 +110,16 @@ code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
 
 /* === 首页文章列表 === */
 .recent-post-item {
-  margin-bottom: 0.9rem; padding: 1rem 1.3rem;
-  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 0.9rem;
+  padding: 0;
+  display: flex; flex-direction: column;
+  min-height: 280px;
 }
-.recent-post-item .recent-post-info {
-  background: transparent !important; border: none !important;
-  flex: 1; padding: 0;
-}
-.recent-post-item .recent-post-info a.article-title {
-  font-size: 1.05rem; font-weight: 600; color: #e2e8f0;
-}
-.recent-post-item:hover .recent-post-info a.article-title { color: #38bdf8; }
-.recent-post-item .article-meta-wrap {
-  font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;
-}
-.recent-post-item .article-meta-wrap i { color: #0ea5e9; margin-right: 0.2rem; }
-.recent-post-item .article-meta-wrap span { margin-right: 0.7rem; }
-
-/* 封面缩略图 */
+/* 封面放上面 */
 .recent-post-item .post-cover {
-  flex-shrink: 0; width: 190px; height: 115px;
-  border-radius: 8px; overflow: hidden;
-  position: relative;
+  width: 100%; height: 170px;
+  border-radius: 10px 10px 0 0; overflow: hidden;
+  position: relative; flex-shrink: 0;
   background: linear-gradient(135deg, #0f1a2e, #162540, #0d1a30, #1a2a45);
   background-size: 300% 300%;
   animation: coverShimmer 6s ease-in-out infinite;
@@ -146,18 +134,37 @@ code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
   position: relative; z-index: 1;
 }
 .recent-post-item:hover .post-cover img { transform: scale(1.06); }
-
-/* 封面流光扫过 */
 .recent-post-item .post-cover::after {
   content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.08) 55%, transparent 60%);
+  background: linear-gradient(180deg, transparent 50%, rgba(8,12,20,0.5));
+}
+/* 封面流光 */
+.recent-post-item .post-cover::before {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.06) 55%, transparent 60%);
   background-size: 200% 100%;
-  animation: coverSweep 3s ease-in-out infinite;
+  animation: coverSweep 4s ease-in-out infinite;
 }
 @keyframes coverSweep {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+/* 标题信息放封面下面 */
+.recent-post-item .recent-post-info {
+  background: transparent !important; border: none !important;
+  padding: 1rem 1.3rem; flex: 1;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.recent-post-item .recent-post-info a.article-title {
+  font-size: 1.05rem; font-weight: 600; color: #e2e8f0;
+  display: block; line-height: 1.4;
+}
+.recent-post-item:hover .recent-post-info a.article-title { color: #38bdf8; }
+.recent-post-item .article-meta-wrap {
+  font-size: 0.75rem; color: #64748b; margin-top: 0.4rem;
+}
+.recent-post-item .article-meta-wrap i { color: #0ea5e9; margin-right: 0.2rem; }
+.recent-post-item .article-meta-wrap span { margin-right: 0.7rem; }
 
 /* === 侧边栏 === */
 #aside-content .card-widget {
@@ -189,11 +196,11 @@ code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
   color: #7dd3fc !important;
 }
 
-/* ==== 文章内容页 ==== */
+/* ==== 文章内容页（几乎不透，保护阅读） ==== */
 #post, #page {
-  padding: 1.5rem 2rem;
-  background: rgba(12,18,30,0.85) !important;
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  padding: 2rem 2.2rem;
+  background: rgba(8,12,20,0.94) !important;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
 }
 #article-container {
   color: #b0bac8; line-height: 1.9; font-size: 0.95rem;
