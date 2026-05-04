@@ -16,7 +16,7 @@
 }
 #body-wrap::before {
   content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: rgba(6,10,18,0.55);
+  background: rgba(6,10,18,0.35);
 }
 
 /* === 全局 === */
@@ -87,17 +87,18 @@ code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
 #post-info #post-meta { color: #94a3b8; }
 
 /* === 主体 === */
-#content-inner { padding-top: 1rem; max-width: 1150px; }
+#content-inner { padding-top: 1.5rem; max-width: 1100px; }
+#recent-posts { display: flex; flex-direction: column; gap: 1.5rem; }
 
 /* === 卡片基础 === */
 .card-widget,
 .recent-post-item,
 #post, #page {
-  background: rgba(12,18,30,0.78) !important;
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  background: rgba(12,18,30,0.55) !important;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255,255,255,0.05) !important;
   border-radius: 10px !important;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.2);
   transition: all 0.3s ease;
   overflow: hidden;
 }
