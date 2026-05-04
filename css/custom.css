@@ -54,18 +54,37 @@ code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
   z-index: 101; width: var(--scroll, 0%); transition: width 0.08s linear;
 }
 
-/* === 页面头部（透明=视频透出） === */
+/* === 页面头部 === */
 #page-header { background: transparent !important; }
 #page-header::before { display: none; }
-#page-header #site-info { display: none; }
-#page-header #post-info {
-  background: rgba(8,12,22,0.55);
+
+/* 首页标题 */
+#page-header #site-info {
+  background: rgba(8,12,22,0.6);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  border-radius: 8px; padding: 1rem 1.5rem;
+  border-radius: 10px; padding: 1.2rem 2rem;
+  display: flex !important; flex-direction: column; align-items: center;
+}
+#page-header #site-info #site-title {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 2.4rem; font-weight: 700; color: #f1f5f9;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+#page-header #site-info #site-subtitle {
+  font-size: 0.9rem; color: #94a3b8; margin-top: 0.3rem;
+}
+
+/* 文章页标题 */
+#page-header #post-info {
+  background: rgba(8,12,22,0.7);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-radius: 10px; padding: 1.3rem 1.8rem;
 }
 #post-info #post-title {
   font-size: 1.5rem; font-weight: 700; color: #f1f5f9;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
+#post-info #post-meta { color: #94a3b8; }
 
 /* === 主体 === */
 #content-inner { padding-top: 1rem; max-width: 1150px; }
@@ -112,6 +131,7 @@ code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
 .recent-post-item .post-cover {
   flex-shrink: 0; width: 190px; height: 115px;
   border-radius: 8px; overflow: hidden;
+  position: relative;
   background: linear-gradient(135deg, #0f1a2e, #162540, #0d1a30, #1a2a45);
   background-size: 300% 300%;
   animation: coverShimmer 6s ease-in-out infinite;
@@ -126,6 +146,18 @@ code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
   position: relative; z-index: 1;
 }
 .recent-post-item:hover .post-cover img { transform: scale(1.06); }
+
+/* 封面流光扫过 */
+.recent-post-item .post-cover::after {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.08) 55%, transparent 60%);
+  background-size: 200% 100%;
+  animation: coverSweep 3s ease-in-out infinite;
+}
+@keyframes coverSweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
 /* === 侧边栏 === */
 #aside-content .card-widget {
