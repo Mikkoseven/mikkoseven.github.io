@@ -117,11 +117,15 @@ code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
   min-height: 280px;
 }
 /* 封面放上面 */
-.recent-post-item .post-cover {
+.recent-post-item .post-cover,
+.recent-post-item .post_cover {
   width: 100%; height: 170px;
   border-radius: 10px 10px 0 0; overflow: hidden;
   position: relative; flex-shrink: 0;
-  background: linear-gradient(135deg, #0f1a2e, #162540, #0d1a30, #1a2a45);
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255, 196, 170, 0.34), transparent 30%),
+    linear-gradient(135deg, #1b1324, #251a2a 42%, #0d1628);
   background-size: 300% 300%;
   animation: coverShimmer 6s ease-in-out infinite;
 }
@@ -129,20 +133,48 @@ code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
   0%,100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
-.recent-post-item .post-cover img {
+.recent-post-item .post-cover img,
+.recent-post-item .post_cover img,
+.recent-post-item .post-bg {
   width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.5s;
+  filter: saturate(1.05) contrast(0.96) brightness(0.92);
+  transition: transform 0.5s, filter 0.5s;
   position: relative; z-index: 1;
 }
-.recent-post-item:hover .post-cover img { transform: scale(1.06); }
-.recent-post-item .post-cover::after {
+#recent-posts .recent-post-item .post_cover a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+#recent-posts .recent-post-item .post_cover .post-bg {
+  display: block;
+  position: relative !important;
+  z-index: 1 !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.recent-post-item:hover .post-cover img,
+.recent-post-item:hover .post_cover img,
+.recent-post-item:hover .post-bg {
+  filter: saturate(1.12) contrast(1) brightness(0.96);
+  transform: scale(1.06);
+}
+.recent-post-item .post-cover::after,
+.recent-post-item .post_cover::after {
   content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background: linear-gradient(180deg, transparent 50%, rgba(8,12,20,0.5));
+  background:
+    radial-gradient(circle at 16% 16%, rgba(255, 205, 184, 0.22), transparent 35%),
+    linear-gradient(180deg, rgba(255, 176, 154, 0.12), transparent 38%, rgba(7, 8, 15, 0.68)),
+    linear-gradient(90deg, rgba(255, 128, 150, 0.12), rgba(80, 184, 255, 0.08));
 }
 /* 封面流光 */
-.recent-post-item .post-cover::before {
+.recent-post-item .post-cover::before,
+.recent-post-item .post_cover::before {
   content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
-  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.06) 55%, transparent 60%);
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 226, 210, 0.08) 45%, rgba(255, 241, 225, 0.14) 50%, rgba(255, 226, 210, 0.08) 55%, transparent 60%);
   background-size: 200% 100%;
   animation: coverSweep 4s ease-in-out infinite;
 }
@@ -327,6 +359,7 @@ figure.highlight {
 #anime-chara {
   position: fixed; bottom: 0; right: 0; z-index: 10; pointer-events: none;
   width: 180px; height: 340px; overflow: hidden; opacity: 0.55;
+  display: none;
 }
 #anime-chara img {
   width: 100%; height: 100%; object-fit: contain; object-position: bottom right;
@@ -388,7 +421,8 @@ figure.highlight {
   #anime-chara { width: 100px; height: 200px; opacity: 0.3; }
   #aside-content { display: none; }
   .recent-post-item { flex-direction: column; padding: 0.8rem; }
-  .recent-post-item .post-cover { width: 100%; height: 150px; }
+  .recent-post-item .post-cover,
+  .recent-post-item .post_cover { width: 100%; height: 150px; }
   #content-inner { padding: 0.5rem; }
   #post, #page { padding: 1rem; }
 }
